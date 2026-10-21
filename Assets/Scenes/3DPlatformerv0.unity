@@ -3231,6 +3231,7 @@ GameObject:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3348,6 +3349,14 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!81 &330585548
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
 --- !u!1 &365315342
 GameObject:
   m_ObjectHideFlags: 0
@@ -9419,6 +9428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 795703813}
   - component: {fileID: 795703814}
+  - component: {fileID: 795703815}
   m_Layer: 0
   m_Name: PlayerMovement
   m_TagString: Untagged
@@ -9434,12 +9444,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795703812}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.227, y: -0.116, z: 0.061}
-  m_LocalScale: {x: 2.834257, y: 2.4274464, z: 3.2928379}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.38600004, y: -0.116, z: 0.15975326}
+  m_LocalScale: {x: 2.8342562, y: 2.4274464, z: 3.2928371}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1951907096}
+  m_Father: {fileID: 853264771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &795703814
 MonoBehaviour:
@@ -9455,6 +9465,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
   jumpForce: 7
+--- !u!54 &795703815
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795703812}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &795910303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9783,7 +9820,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cb268e0a486346a49840bec9ed7750f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 795703813}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cb268e0a486346a49840bec9ed7750f7, type: 3}
       insertIndex: -1
@@ -9812,7 +9852,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3907265ddda38dd42984d4924eca5332, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -16825,7 +16865,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 795703813}
   - {fileID: 330585546}
   - {fileID: 853264771}
   m_Father: {fileID: 0}
@@ -16842,7 +16881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdb18b0c0e14ad49adccfaba8d93429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 6
+  moveSpeed: 5
   jumpForce: 6
 --- !u!54 &1951907098
 Rigidbody:

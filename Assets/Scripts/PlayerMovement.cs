@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
 
-    [Header("Настройки движения")]
-    public float moveSpeed = 5f;
+    [Header("Настройки")]
+    public float moveSpeed = 5f; // Скорость для физического перемещения
     public float jumpForce = 7f;
 
     private void Awake()
@@ -19,18 +19,40 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-        Vector3 movement = transform.TransformDirection(input.normalized);
-        rb.linearVelocity = new Vector3(movement.x * moveSpeed, rb.linearVelocity.y, movement.z * moveSpeed);
+        // 1. Считываем ввод
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
 
+        Vector3 inputDir = new Vector3(moveX, 0f, moveZ);
+        float inputMagnitude = Mathf.Clamp01(inputDir.magnitude);
+
+        
         if (animator != null)
-            animator.SetBool("run", input.sqrMagnitude > 0.01f);
+        {
+            animator.SetFloat("Speed", inputMagnitude);
+        }
 
-        if (!Input.GetKeyDown(KeyCode.Space))
-            return;
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator?.SetTrigger("Jump");
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+    }
 
-        animator?.SetTrigger("Jump");
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    private void FixedUpdate()
+    {
+       
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
+        Vector3 moveDir = new Vector3(moveX, 0f, moveZ).normalized;
+
+        if (moveDir.magnitude > 0.1f)
+        {
+            
+            Vector3 targetPosition = rb.position + transform.TransformDirection(moveDir) * moveSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(targetPosition);
+        }
     }
 }
